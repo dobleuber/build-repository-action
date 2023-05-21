@@ -1,0 +1,44 @@
+name: Build Development Image
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  prepare_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Create Empty Release
+        id: release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: dev-$(date +'%Y%m%d-%H%M')  # Etiqueta con el formato dev-YYYYMMDD-HHmm
+          body_path: README.md
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target_commitish: master
+          draft: false
+
+    outputs:
+      release_id: ${{ steps.release.outputs.id }}
+
+  build:
+    runs-on: ubuntu-latest
+    needs: prepare_release
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Upload Armbian Development Image
+        uses: amazingfate/armbian-compile-action@main
+        with:
+          branch: master  # Rama del repositorio de Armbian
+          board: x86  # Placa para la imagen de desarrollo x86
+          flavor: ubuntu  # Sabor de la imagen de desarrollo
+          release-id: ${{ needs.prepare_release.outputs.release_id }}  # ID del lanzamiento creado en el paso anterior
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pre-loaded: true  # Indicar que la imagen debe estar pre-cargada con el último script de compilación
+          cache-enabled: true  # Indicar que se debe usar la caché para acelerar la construcción
+
