@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create Empty Release
         id: release
@@ -28,7 +28,7 @@ jobs:
     needs: manual_trigger
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Upload Armbian Development Image
         uses: amazingfate/armbian-compile-action@main
