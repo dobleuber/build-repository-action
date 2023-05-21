@@ -1,5 +1,8 @@
 name: Build Development Image
 
+on:
+  workflow_dispatch:
+
 jobs:
   manual_trigger:
     runs-on: ubuntu-latest
