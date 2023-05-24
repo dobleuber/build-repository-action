@@ -3,6 +3,9 @@ name: Build Development Image
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   manual_trigger:
     runs-on: ubuntu-latest
