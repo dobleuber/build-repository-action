@@ -24,7 +24,7 @@ jobs:
           tag_name: ${{ env.RELEASE_TAG }}  # Usamos la etiqueta generada
           body_path: README.md
           token: ${{ secrets.GITHUB_TOKEN }}
-          target_commitish: master
+          target_commitish: main
           draft: false
 
     outputs:
@@ -40,7 +40,7 @@ jobs:
       - name: Upload Armbian Development Image
         uses: amazingfate/armbian-compile-action@main
         with:
-          branch: master  # Rama del repositorio de Armbian
+          branch: main  # Rama del repositorio de Armbian
           board: x86  # Placa para la imagen de desarrollo x86
           flavor: ubuntu  # Sabor de la imagen de desarrollo
           release-id: ${{ needs.manual_trigger.outputs.release_id }}  # ID del lanzamiento creado en el paso anterior
