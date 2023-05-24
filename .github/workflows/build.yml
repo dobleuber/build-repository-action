@@ -16,6 +16,9 @@ jobs:
       - name: Generate Tag
         id: gen_tag
         run: echo "RELEASE_TAG=dev-$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
+      
+      - name: Create directory
+        run: mkdir -p patch/kernel/archive/rk35xx-5.10/
 
       - name: Create Empty Release
         id: release
