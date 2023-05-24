@@ -10,9 +10,6 @@ jobs:
   manual_trigger:
     runs-on: ubuntu-latest
     steps:  
-      - name: Create directory
-        run: mkdir -p patch/kernel/archive/rk35xx-5.10/
-
       - name: Checkout Repository
         uses: actions/checkout@v3
 
