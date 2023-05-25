@@ -61,10 +61,9 @@ jobs:
           touch .ignore_changes  
 
       - name: Upload Armbian Development Image
-        uses: dobleuber/armbian-compile-action@main
+        uses: amazingfate/armbian-compile-action@main
         with:
-          branch: main  # Rama del repositorio de Armbian
-          board: x86  # Placa para la imagen de desarrollo x86
+          board: X86  # Placa para la imagen de desarrollo x86
           flavor: ubuntu  # Sabor de la imagen de desarrollo
           release-id: ${{ needs.manual_trigger.outputs.release_id }}  # ID del lanzamiento creado en el paso anterior
           github-token: ${{ secrets.GITHUB_TOKEN }}
