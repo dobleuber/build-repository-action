@@ -1,7 +1,11 @@
 name: Build Development Image
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 22 * * 5'  # Runs every Friday at 10 PM
 
 permissions:
   contents: write
@@ -15,13 +19,13 @@ jobs:
 
       - name: Generate Tag
         id: gen_tag
-        run: echo "RELEASE_TAG=dev-$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
+        run: echo "RELEASE_TAG=dev-$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV  # Using the generated tag
 
       - name: Create Empty Release
         id: release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.RELEASE_TAG }}  # Usamos la etiqueta generada
+          tag_name: ${{ env.RELEASE_TAG }}
           body_path: README.md
           token: ${{ secrets.GITHUB_TOKEN }}
           target_commitish: main
@@ -63,7 +67,7 @@ jobs:
       - name: Upload Armbian Development Image
         uses: amazingfate/armbian-compile-action@main
         with:
-          board: X86  # Placa para la imagen de desarrollo x86
-          flavor: ubuntu  # Sabor de la imagen de desarrollo
-          release-id: ${{ needs.manual_trigger.outputs.release_id }}  # ID del lanzamiento creado en el paso anterior
+          board: x86  # Board for the x86 development image
+          flavor: ubuntu  # Flavor of the development image
+          release-id: ${{ needs.manual_trigger.outputs.release_id }}  # ID of the release created in the previous step
           github-token: ${{ secrets.GITHUB_TOKEN }}
