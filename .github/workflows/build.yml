@@ -67,7 +67,7 @@ jobs:
       - name: Upload Armbian Development Image
         uses: amazingfate/armbian-compile-action@main
         with:
-          board: x86  # Board for the x86 development image
+          board: uefi-x86  # Board for the x86 development image
           flavor: ubuntu  # Flavor of the development image
           release-id: ${{ needs.manual_trigger.outputs.release_id }}  # ID of the release created in the previous step
           github-token: ${{ secrets.GITHUB_TOKEN }}
