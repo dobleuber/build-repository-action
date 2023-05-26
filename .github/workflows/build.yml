@@ -55,8 +55,9 @@ jobs:
           echo "build-minimal=no" >> $GITHUB_ENV  
           echo "build-desktop=yes" >> $GITHUB_ENV  
           echo "desktop-environment=gnome" >> $GITHUB_ENV  
-          echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV  
+          echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
           echo "expert=yes" >> $GITHUB_ENV
+          echo "KERNEL_KEEP_CONFIG=yes" >> $GITHUB_ENV
 
       - name: Build Image
         shell: bash
@@ -65,7 +66,7 @@ jobs:
           touch .ignore_changes  
 
       - name: Upload Armbian Development Image
-        uses: amazingfate/armbian-compile-action@main
+        uses: dobleuber/armbian-compile-action@main
         with:
           board: uefi-x86  # Board for the x86 development image
           flavor: ubuntu  # Flavor of the development image
