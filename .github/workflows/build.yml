@@ -58,6 +58,7 @@ jobs:
           echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
           echo "expert=yes" >> $GITHUB_ENV
           echo "KERNEL_KEEP_CONFIG=yes" >> $GITHUB_ENV
+          echo "KERNELBRANCH=main" >> $GITHUB_ENV  # replace 'legacy' with your desired kernel branch
 
       - name: Build Image
         shell: bash
