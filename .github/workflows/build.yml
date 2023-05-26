@@ -73,3 +73,4 @@ jobs:
           flavor: ubuntu  # Flavor of the development image
           release-id: ${{ needs.manual_trigger.outputs.release_id }}  # ID of the release created in the previous step
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          kernelbranch: main
